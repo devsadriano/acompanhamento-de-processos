@@ -10,7 +10,6 @@ const navItems = [
     { label: '🏢 Origens', value: 'origens' },
     { label: '📚 Assuntos', value: 'assuntos' },
     { label: '📝 Complementos', value: 'complementos' },
-    { label: '🚥 STATUS', value: 'status' },
 ]
 
 const adminNavItems = [

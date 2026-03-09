@@ -14,20 +14,17 @@ const { fetchItems } = useAuxiliares()
 const origens = ref<{nome: string}[]>([])
 const assuntos = ref<{nome: string}[]>([])
 const complementos = ref<{nome: string}[]>([])
-const status_list = ref<{nome: string}[]>([])
 
 const loadOptions = async () => {
     try {
-        const [o, a, c, s] = await Promise.all([
+        const [o, a, c] = await Promise.all([
             fetchItems('aux_origens'),
             fetchItems('aux_assuntos'),
-            fetchItems('aux_complementos'),
-            fetchItems('aux_status')
+            fetchItems('aux_complementos')
         ])
         origens.value = o
         assuntos.value = a
         complementos.value = c
-        status_list.value = s
     } catch (err) {
         console.error('Erro ao carregar opções:', err)
     }
@@ -208,9 +205,6 @@ const handleSubmit = async () => {
                     <optgroup label="Padrão">
                       <option v-for="a in ACOES" :key="a" :value="a">{{ a }}</option>
                     </optgroup>
-                    <optgroup v-if="status_list.length" label="Personalizado">
-                      <option v-for="s in status_list" :key="s.nome" :value="s.nome">{{ s.nome }}</option>
-                    </optgroup>
                   </select>
                 </div>
               </div>
@@ -234,9 +228,6 @@ const handleSubmit = async () => {
                     <option :value="null">— Sem ação —</option>
                     <optgroup label="Padrão">
                       <option v-for="a in ACOES" :key="a" :value="a">{{ a }}</option>
-                    </optgroup>
-                    <optgroup v-if="status_list.length" label="Personalizado">
-                      <option v-for="s in status_list" :key="s.nome" :value="s.nome">{{ s.nome }}</option>
                     </optgroup>
                   </select>
                 </div>

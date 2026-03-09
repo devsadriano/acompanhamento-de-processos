@@ -290,8 +290,5 @@ const handleSaveProcess = async (formData: Partial<Processo>) => {
     <div v-else-if="activeView === 'complementos'" class="h-full">
         <AuxManager title="Complementos" table="aux_complementos" />
     </div>
-    <div v-else-if="activeView === 'status'" class="h-full">
-        <AuxManager title="STATUS" table="aux_status" />
-    </div>
   </div>
 </template>
