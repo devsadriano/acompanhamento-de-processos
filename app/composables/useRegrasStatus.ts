@@ -43,17 +43,21 @@ export const useRegrasStatus = () => {
 
     const createRegra = async (input: RegraStatusInput) => {
         try {
+            const userId = user.value?.id
             const { data, error: createError } = await (supabase as any)
                 .from('regras_status')
-                .insert({ ...input, user_id: user.value?.id })
+                .insert({
+                    ...input,
+                    ...(userId ? { user_id: userId } : {})
+                })
                 .select()
                 .single()
 
             if (createError) throw createError
             await fetchRegras()
             return data as RegraStatus
-        } catch (err) {
-            const msg = err instanceof Error ? err.message : 'Erro ao criar regra'
+        } catch (err: any) {
+            const msg = err.message || 'Erro ao criar regra'
             console.error('Erro ao criar regra:', err)
             throw new Error(msg)
         }
